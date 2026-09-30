@@ -4,4 +4,3 @@ matplotlib
 scikit-learn
 pydeseq2
 pyyaml
-Test
