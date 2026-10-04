@@ -1,5 +1,6 @@
 # Shared parameters. Lines marked BOTH must be set by both students.
 counts: data/airway_counts.csv
 metadata: data/airway_metadata.csv
-n_top_features: 20     # BOTH - A: most-variable genes for PCA (e.g. 500); B: rows in the top-gene table (e.g. 20)
+n_rows_top_gene_table: 20     # BOTH - A: most-variable genes for PCA (e.g. 500); B: rows in the top-gene table (e.g. 20)
+n_most_variable_genes: 500     # BOTH - A: most-variable genes for PCA (e.g. 500); B: rows in the top-gene table (e.g. 20)
 padj_threshold: 0.05

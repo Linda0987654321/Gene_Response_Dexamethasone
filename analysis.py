@@ -7,6 +7,7 @@ BOTH implement       : load_data, main, summary_sentence   <- expect a merge con
 
 Run: python analysis.py
 """
+
 import yaml
 import pandas as pd
 import matplotlib
@@ -21,6 +22,9 @@ CONFIG = yaml.safe_load(open("config.yaml"))
 from sklearn.decomposition import PCA
 from pydeseq2.dds import DeseqDataSet
 from pydeseq2.ds import DeseqStats
+import numpy as np
+import os
+
 
 # ---------- BOTH ----------
 def load_data(counts_path, metadata_path):
@@ -72,18 +76,44 @@ def load_data(counts_path, metadata_path):
 
     return counts.astype(int), metadata
 
-
 # ---------- Student A ----------
 def normalize_log_cpm(counts):
     """log2(counts per million + 1). Return a DataFrame with the same shape."""
-    raise NotImplementedError
 
+    library_sizes = counts.sum(axis=0)
+    cpm = counts.div(library_sizes, axis=1) * 1_000_000
+    logcpm = np.log2(cpm + 1)
+
+    return logcpm
 
 def plot_pca(logcpm, metadata, out="results/pca.png"):
     """PCA on the samples (transpose!), scatter PC1 vs PC2 coloured by treatment.
-    Hint: sklearn.decomposition.PCA on the n_top_features most variable genes."""
-    raise NotImplementedError
+    Hint: sklearn.decomposition.PCA on the . most variable genes."""
+    
+    n_top = CONFIG.get("n_most_variable_genes", 500)
 
+    top_genes = logcpm.var(axis=1).nlargest(n_top).index
+    pca_data = logcpm.loc[top_genes].T
+
+    pca = PCA(n_components=2)
+    pcs = pca.fit_transform(pca_data)
+
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+
+    for treatment in metadata["treatment"].unique():
+        mask = metadata["treatment"] == treatment
+        plt.scatter(
+            pcs[mask.to_numpy(), 0],
+            pcs[mask.to_numpy(), 1],
+            label=treatment
+        )
+
+    plt.xlabel("PC1")
+    plt.ylabel("PC2")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(out)
+    plt.close()
 
 # ---------- Student B ----------
 def run_deseq(counts, metadata):
@@ -180,8 +210,7 @@ def summary_sentence(results):
         f"the strongest result was {strongest_gene} "
         f"(padj={strongest_padj:.3g})."
     )
-
-
+    
 def main():
     # Load the file paths from config.yaml and read both data tables.
     counts, metadata = load_data(
@@ -195,10 +224,12 @@ def main():
 
     # Student B: run differential expression and save the top genes.
     results = run_deseq(counts, metadata)
-    top_genes(results, CONFIG["n_top_features"])
+    top_genes(results, CONFIG["n_rows_top_gene_table"])
 
     # BOTH: print the summary sentence.
     print(summary_sentence(results))
+
+  
 
 
 if __name__ == "__main__":
