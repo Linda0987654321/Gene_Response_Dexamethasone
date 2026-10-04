@@ -1,4 +1,3 @@
-## Linda: Test Pushing and Pulling
 # Group 1 - Transcriptomics: glucocorticoid response in airway smooth muscle
 
 **Research question:** Which genes respond to dexamethasone in airway smooth muscle cells?
