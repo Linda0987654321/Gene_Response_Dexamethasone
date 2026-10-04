@@ -4,7 +4,3 @@ matplotlib
 scikit-learn
 pydeseq2
 pyyaml
-
-Linda: Test Branching and Merging
-
-Ivana: Testing if it works the other way around.
