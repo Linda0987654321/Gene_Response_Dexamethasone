@@ -1,5 +1,7 @@
 # Group 1: Transcriptomics — glucocorticoid response in airway smooth muscle
 
+**GitHub repository:** [Gene_Response_Dexamethasone](https://github.com/Linda0987654321/Gene_Response_Dexamethasone)
+
 **Research question:** Which genes respond to dexamethasone in airway smooth muscle cells?
 
 ## Data
@@ -9,6 +11,7 @@ The analysis uses `data/airway_counts.csv`, containing raw integer counts for 19
 ## Implementation
 
 The analysis is implemented in `analysis.py`. Ivana implemented log-CPM normalization and PCA; Linda implemented differential-expression analysis and selection of the top genes. Both worked on the shared functions for loading data, running the analysis, and producing a summary sentence.
+During development, GitHub pull requests were reviewed and potential merge conflicts resolved together.
 
 | Function | Purpose |
 |---|---|
@@ -43,7 +46,7 @@ The script creates the `results` directory if needed, saves the PCA plot and top
 ## Results
 
 The supplied top-gene table shows 20 genes with adjusted p-values below 0.05. The strongest result is **ENSG00000152583**, with an adjusted p-value of approximately `4.50 × 10⁻⁷¹`.
-The PCA plot shows treated samples shifted toward lower PC2 values than their corresponding controls. Samples also vary substantially along PC1.
+The PCA plot shows treated samples shifted toward lower PC2 values than their corresponding controls, but there is no clear clustering of treated vs untreated samples:
 
 ![PCA plot of airway smooth muscle samples](results/pca.png)
 
