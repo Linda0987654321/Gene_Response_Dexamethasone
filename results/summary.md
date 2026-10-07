@@ -3,14 +3,12 @@
 ## Research question
 Which genes respond to dexamethasone in airway smooth muscle cells?
 
-## What we did
-We analysed gene expression data from eight samples, comparing dexamethasone-treated cells with control cells. We first checked that the counts and sample information matched.
+## Overview
+This analysis used `analysis.py` to compare gene expression between 4 control and 4 dexamethasone-treated airway smooth muscle cell samples, using raw counts for 19,271 genes. For the PCA, counts were converted to counts per million (CPM) for each sample and log2-transformed as `log2(CPM + 1)`. The script produces a PCA plot.
 
-Student A converted the counts to counts per million (CPM), applied a log transformation, and created a principal component analysis (PCA) plot. This plot helps us explore similarities and differences between samples based on their gene expression. Each point represents one sample, coloured by treatment. Samples that are close together have more similar expression patterns, while samples farther apart have more different patterns.
+In addition, it creates a table of the 20 genes with the smallest adjusted p-values and prints a summary of significant genes.
 
-Student B used PyDESeq2 with the original counts to identify genes with different expression between treated and control cells. The results show the size and direction of each change, together with an adjusted p-value. Genes were ranked by adjusted p-value.
-
-## Results
+## Results and Interpretation
 We found 2,201 genes with significantly different expression between dexamethasone-treated and control cells (adjusted p-value < 0.05). Some showed higher expression after treatment, while others showed lower expression.
 ENSG00000152583 had the smallest adjusted p-value (4.48 × 10⁻⁷¹), providing the strongest statistical evidence for a difference, although not necessarily the largest change in expression.
 
