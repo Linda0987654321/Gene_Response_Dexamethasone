@@ -45,8 +45,13 @@ The script creates the `results` directory if needed, saves the PCA plot and top
 
 ## Results
 
-The supplied top-gene table shows 20 genes with adjusted p-values below 0.05. The strongest result is **ENSG00000152583**, with an adjusted p-value of approximately `4.50 × 10⁻⁷¹`.
-The PCA plot shows treated samples shifted toward lower PC2 values than their corresponding controls, but there is no clear clustering of treated vs untreated samples:
+The differential-expression analysis identified **2,201 genes with adjusted p-values below 0.05**, indicating a significant response to dexamethasone treatment.
+
+The `top_genes.csv` file contains the **20 most statistically significant genes**, ranked by adjusted p-value. The most statistically significant gene was **ENSG00000152583**, with an adjusted p-value of approximately `4.50 × 10⁻⁷¹`.
+
+The PCA plot shows that dexamethasone-treated samples tend to have lower PC2 values than the control samples. However, the treated and control samples do not form two completely separate clusters, and there is also substantial variation along PC1.
+
+Overall, the PCA suggests treatment-related differences in the global gene-expression patterns, while the differential-expression analysis identifies the individual genes that respond significantly to dexamethasone treatment.
 
 ![PCA plot of airway smooth muscle samples](results/pca.png)
 
